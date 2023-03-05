@@ -23,12 +23,14 @@
 import json
 
 phonebook = []
-# по умолчанию (8)
+
+#6
 def load():
    global phonebook
    with open("D:\Program Files\VSCodeprogramming\dz\sem8hw\phonebook.json","r",encoding="utf-8") as fb: 
       phonebook = json.load(fb)
    print("Телефонный справочник загружен из файла")
+load() #по умолчанию для исключения сохранения пустого списка
 # 2
 def save():   
    with open("D:\Program Files\VSCodeprogramming\dz\sem8hw\phonebook.json","w",encoding="utf-8") as fb:
@@ -50,7 +52,7 @@ def del_null ():
 
 def red():
    data = input('''
-   Введите полностью фамилию, имя или телефон контакта, который необходимо отредактировать: ''')
+   Введите фамилию, имя или телефон контакта или email контакта, который необходимо отредактировать: ''')
    for i in range(len(phonebook)):
       for k, v in phonebook[i].items():
          if v == data:
@@ -108,20 +110,23 @@ def show_phonebook():
            print(k, v)
          print("_______________")
 
-print("\nВыберите необходимое действие:\n"
+
+def print_phonebook():
+   print("\nВыберите необходимое действие:\n"
           "1. Отобразить весь справочник\n"
           "2. Сохранить справочник\n"
           "3. Добавить абонента в справочник\n"
           "4. Убрать пустые контакты\n"
           "5. Удаление/редактирование контакта\n"
           "0. Закончить работу\n"
-      "Рекомендуем сначала загрузить справочник из файла командой '8' ")
-
+          "9. Повторить команды\n"
+      "Перед использованием справочника загрузите предыдущую базу данных коммандой '6' ")
+print_phonebook()
 while True:
    comand = input("Введите комманду: ")
    if comand == "1":
       show_phonebook()
-   elif comand == "8":
+   elif comand == "6":
       load()
    elif comand == "2":
       save()
@@ -131,6 +136,8 @@ while True:
       del_null()
    elif comand == "5":
       delite()
+   elif comand == "9":
+      print_phonebook()
    elif comand == "0":
       save()
       print("Телефонный справочник сохранен. Всего хорошего!")
